@@ -98,6 +98,18 @@ class PersonServiceTest {
     }
 
     @Test
+    void throwExceptionWhenDeleteWrongId() {
+        // Given
+        Integer idToDelete = 5;
+
+        // Then
+        assertThatThrownBy(() -> {
+            // When
+            underTest.deletePerson(5);
+        }).hasMessage("person with id " + idToDelete + " not found");
+    }
+
+    @Test
     void canGetPeopleFromDB() {
         // When
         List<Person> actualPeople = underTest.getPeople();
