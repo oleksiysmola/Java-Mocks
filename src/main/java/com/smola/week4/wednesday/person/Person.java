@@ -7,7 +7,8 @@ public class Person {
     private String name;
     private Integer age;
 
-    public void Person(Integer id, String name, Integer age){
+
+    public Person(Integer id, String name, Integer age){
         this.id = id;
         this.name = name;
         this.age = age;
