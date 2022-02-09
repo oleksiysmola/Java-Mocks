@@ -13,6 +13,9 @@ public class Person {
         this.name = name;
         this.age = age;
     }
+    public Person(){
+
+    }
 
     public Integer getId() {
         return id;

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
@@ -58,6 +59,30 @@ class PersonServiceTest {
 
         // Then
         verify(personDAO).savePerson(newPerson);
+    }
+
+    @Test
+    void throwsExceptionWhenSavesEmptyPerson(){
+        // Given
+        Person newPerson = new Person();
+
+        // Then
+        assertThatThrownBy(() -> {
+            // When
+            underTest.savePerson(newPerson);
+        }).hasMessage("Person cannot have empty fields");
+    }
+
+    @Test
+    void throwsExceptionWhenSavesExistingId(){
+        // Given
+        Person newPerson = new Person(2, "Dave", 40);
+
+        // Then
+        assertThatThrownBy(() -> {
+            // When
+            underTest.savePerson(newPerson);
+        }).hasMessage("person with id " + newPerson.getId() + " already exists");
     }
 
     @Test
