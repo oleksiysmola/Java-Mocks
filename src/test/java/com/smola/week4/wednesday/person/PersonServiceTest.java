@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -16,6 +17,7 @@ class PersonServiceTest {
 
     private PersonDAO personDAO;
     private PersonService underTest;
+    private List<Person> peopleTest;
 
     @BeforeEach
     void setUp() {
@@ -27,6 +29,7 @@ class PersonServiceTest {
         Person katie = new Person(2, "Katie", 25);
         peopleMockData.add(ryan);
         peopleMockData.add(katie);
+        this.peopleTest = peopleMockData;
         // Extra person
         Person extraPerson = new Person(3, "Dave", 40);
 
@@ -71,14 +74,22 @@ class PersonServiceTest {
 
     @Test
     void canGetPeopleFromDB() {
-        // Given
         // When
+        List<Person> actualPeople = underTest.getPeople();
         // Then
+        List<Person> expectedPeople = peopleTest;
+        assertThat(actualPeople).isEqualTo(expectedPeople);
     }
 
     @Test
     void canGetPersonById() {
-
+        // Given
+        Integer idToTest = 1;
+        // When
+        Person actual = underTest.getPersonById(idToTest).get();
+        // Then
+        Person expected = new Person(1, "Ryan", 20);
+        assertThat(actual).isEqualTo(expected);
     }
 }
 
