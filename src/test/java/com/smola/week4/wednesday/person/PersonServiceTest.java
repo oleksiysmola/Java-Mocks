@@ -59,10 +59,21 @@ class PersonServiceTest {
 
     @Test
     void itCanDeletePerson() {
+        // Given
+        Integer idToDelete = 1;
+
+        // When
+        underTest.deletePerson(idToDelete);
+
+        // Then
+        verify(personDAO).deletePerson(idToDelete);
     }
 
     @Test
     void canGetPeopleFromDB() {
+        // Given
+        // When
+        // Then
     }
 
     @Test
